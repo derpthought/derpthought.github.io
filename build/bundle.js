@@ -45,9 +45,6 @@ var app = (function () {
     function space() {
         return text(' ');
     }
-    function empty() {
-        return text('');
-    }
     function listen(node, event, handler, options) {
         node.addEventListener(event, handler, options);
         return () => node.removeEventListener(event, handler, options);
@@ -547,8 +544,10 @@ var app = (function () {
     	let t0;
     	let button;
     	let t2;
-    	let await_block_anchor;
     	let promise_1;
+    	let t3;
+    	let img;
+    	let img_src_value;
     	let mounted;
     	let dispose;
 
@@ -572,10 +571,14 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Search";
     			t2 = space();
-    			await_block_anchor = empty();
     			info.block.c();
+    			t3 = space();
+    			img = element("img");
     			add_location(input, file, 34, 0, 1423);
     			add_location(button, file, 35, 0, 1449);
+    			if (img.src !== (img_src_value = "images/attribution.gif")) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "giphy attribution");
+    			add_location(img, file, 41, 0, 1606);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -586,10 +589,11 @@ var app = (function () {
     			insert_dev(target, t0, anchor);
     			insert_dev(target, button, anchor);
     			insert_dev(target, t2, anchor);
-    			insert_dev(target, await_block_anchor, anchor);
     			info.block.m(target, info.anchor = anchor);
-    			info.mount = () => await_block_anchor.parentNode;
-    			info.anchor = await_block_anchor;
+    			info.mount = () => t3.parentNode;
+    			info.anchor = t3;
+    			insert_dev(target, t3, anchor);
+    			insert_dev(target, img, anchor);
 
     			if (!mounted) {
     				dispose = [
@@ -620,10 +624,11 @@ var app = (function () {
     			if (detaching) detach_dev(t0);
     			if (detaching) detach_dev(button);
     			if (detaching) detach_dev(t2);
-    			if (detaching) detach_dev(await_block_anchor);
     			info.block.d(detaching);
     			info.token = null;
     			info = null;
+    			if (detaching) detach_dev(t3);
+    			if (detaching) detach_dev(img);
     			mounted = false;
     			run_all(dispose);
     		}
